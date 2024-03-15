@@ -1,0 +1,84 @@
+.header {
+  //Compute and Security Dashboard
+  font-weight: 700;
+  margin-bottom: var(--bs-content-padding-y);
+  text-transform: capitalize;
+  color: #666667;
+  font-size: 18px;
+}
+.pageHeader {
+  //Other reports header
+  font-weight: 700;
+  margin-bottom: var(--bs-content-padding-y);
+  text-transform: capitalize;
+  color: #404041;
+  font-size: 20px;
+}
+
+.rowPadding {
+  padding: 0 5px;
+}
+// **************************************
+@media (max-width: 1920px) {
+  .header {
+    font-size: 18px;
+  }
+  .pageHeader {
+    font-size: 20px;
+  }
+}
+@media (max-width: 1366px) {
+  .header {
+    font-size: 16px;
+  }
+  .pageHeader {
+    font-size: 18px;
+  }
+}
+@media (max-width: 1280px) {
+  .header {
+    font-size: 14px;
+  }
+  .pageHeader {
+    font-size: 16px;
+  }
+}
+@media (max-width: 1024px) {
+  .header {
+    font-size: 14px;
+  }
+  .pageHeader {
+    font-size: 14px;
+  }
+}
+@media (max-width: 768px) {
+  .header {
+    font-size: 14px;
+  }
+  .pageHeader {
+    font-size: 14px;
+  }
+}
+// **************************************
+
+.breadcrumbTitle {
+  color: #666667 !important;
+  font-size: 14px;
+}
+
+@media (max-width: 1366px) {
+  .breadcrumbTitle {
+    font-size: 12px;
+  }
+}
+
+.pageHeader {
+  display: flex;
+  margin: 38px 14px -20px 0px;
+}
+
+.breadcrumbItem {
+  font-size: 13px;
+  color: #878484;
+  font-weight: 300;
+}

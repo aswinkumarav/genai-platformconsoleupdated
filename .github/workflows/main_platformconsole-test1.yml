@@ -16,10 +16,10 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '20.11.1'  # Change this to your Node.js version
+        node-version: '14'  # Change this to your Node.js version
  
     - name: Install frontend dependencies
-      run: npm install
+      run: npm ci
       working-directory: frontend  # Change this to your frontend directory
  
     - name: Build frontend

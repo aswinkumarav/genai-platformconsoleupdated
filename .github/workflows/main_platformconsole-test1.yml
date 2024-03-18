@@ -6,9 +6,9 @@ trigger:
 variables:
  azureSubscription:'09dff827-8636-4ded-adf3-8291b150ab58'
  azureResourceGroup:'Nucleus_DIF_AI_RG'
- appName: 'platformconsole-test1'
- pythonVersion:'3.11'  # e.g., 3.8
- nodeVersion:'20.11.1'    # e.g., 14.x
+ appName:'platformconsole-test1'
+ pythonVersion:'3.11'
+ nodeVersion:'20.11.1'
  
 stages:
 -stage: Build

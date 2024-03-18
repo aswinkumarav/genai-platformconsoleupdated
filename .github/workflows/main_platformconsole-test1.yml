@@ -1,56 +1,45 @@
----
-trigger:
-  branches:
-    include:
+name: Build and Deploy to Production
+ 
+on:
+  push:
+    branches:
       - main
-variables: azureSubscription:'09dff827-8636-4ded-adf3-8291b150ab58'
-  azureResourceGroup:'Nucleus_DIF_AI_RG' appName:'platformconsole-test1'
-  pythonVersion:'3.11' nodeVersion:'20.11.1'
-stages: null
--stage: Build displayName:'Build and Package'
+ 
 jobs:
-  - job: Build_React
-     displayName:'Build React App'
-    pool:
-      vmImage: ubuntu-latest
+  build-and-deploy:
+    runs-on: ubuntu-latest
+ 
     steps:
-      - task: NodeTool@0
-        inputs: versionSpec:'$(nodeVersion)' displayName:'Install Node.js'
-      - script: |
-          cd frontend
-          npm install
-          npm run build
-          displayName:'Build React Application'
-      - task: ArchiveFiles@2 displayName:'Archive Build Artifacts'
-        inputs: rootFolderOrFile:'$(Build.SourcesDirectory)/build'
-          includeRootFolder:false archiveType:'zip'
-          archiveFile:'$(Build.ArtifactStagingDirectory)/react-app.zip'
-          replaceExistingArchive:true
-  - job: Build_Python displayName:'Build Python App'
-    pool:
-      vmImage: ubuntu-latest
-    steps:
-      - task: UsePythonVersion@0
-        inputs: versionSpec:'$(pythonVersion)' addToPath:true displayName:'Use Python
-          $(pythonVersion)'
-      - script: |
-          cd ../
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          displayName:'Install Python dependencies'
-      - task: ArchiveFiles@2 displayName:'Archive Python App'
-        inputs: rootFolderOrFile:'$(Build.SourcesDirectory)' includeRootFolder:false
-          archiveType:'zip'
-          archiveFile:'$(Build.ArtifactStagingDirectory)/python-app.zip'
-          replaceExistingArchive:true
--stage1: Deploy displayName:'Deploy to Azure Web App' dependsOn:Build
-jobs1:
-  - job: Deploy displayName:'Deploy to Azure Web App'
-    pool:
-      vmImage: ubuntu-latest
-    steps:
-      - task: AzureWebApp@1 displayName:'Azure Web App Deploy'
-        inputs: azureSubscription:$(azureSubscription) appName:$(appName)
-        package: $(Pipeline.Workspace)/reactApp.zip
-        enableCustomDeployment: true
-        deploymentMethod: zipDeploy
+    - name: Checkout repository
+      uses: actions/checkout@v2
+ 
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20.11.1'  # Change this to your Node.js version
+ 
+    - name: Install frontend dependencies
+      run: npm install
+      working-directory: frontend  # Change this to your frontend directory
+ 
+    - name: Build frontend
+      run: npm run build
+      working-directory: frontend  # Change this to your frontend directory
+ 
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.11'  # Change this to your Python version
+ 
+    - name: Install backend dependencies
+      run: pip install -r requirements.txt
+      # working-directory: backend  # Change this to your backend directory
+ 
+    - name: Start Gunicorn server
+      run: |
+        gunicorn -w 4 -k uvicorn.workers.UvicornWorker main:app -b 0.0.0.0:8000 --daemon
+
+    - name: Deploy to Azure Web App
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: platformconsole-test1

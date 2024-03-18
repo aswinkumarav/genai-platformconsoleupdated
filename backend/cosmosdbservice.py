@@ -13,7 +13,6 @@ class CosmosQueryClient():
         self.cosmosdb_client = CosmosClient(self.cosmosdb_endpoint, credential=credential)
         self.database_client = self.cosmosdb_client.get_database_client(database_name)
         self.container_client = self.database_client.get_container_client(container_name)
-        print(self.container_client)
 
     def ensure(self):
         try:

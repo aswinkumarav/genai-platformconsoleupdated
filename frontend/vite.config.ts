@@ -1,9 +1,18 @@
-import { defineConfig  } from 'vite'
-import react from '@vitejs/plugin-react'
-//import viteTsconfigPaths from "vite-tsconfig-paths";
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
-  define: {'process.env': process.env}
+    plugins: [react()],
+    build: {
+        outDir: "./build",
+        emptyOutDir: true,
+        sourcemap: true
+    },
+    server: {
+        proxy: {
+            "/ask": "http://localhost:5000",
+            "/chat": "http://localhost:5000"
+        }
+    }
 });

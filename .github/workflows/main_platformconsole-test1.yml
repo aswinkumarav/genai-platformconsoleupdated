@@ -1,69 +1,82 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-# More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
-
-name: Build and deploy Python app to Azure Web App - platformconsole-test1
-
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Python version
-        uses: actions/setup-python@v1
-        with:
-          python-version: '3.11'
-
-      - name: Create and start virtual environment
-        run: |
-          python -m venv venv
-          source venv/bin/activate
-      
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-        
-      # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
-
-      - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
-
-      - name: Upload artifact for deployment jobs
-        uses: actions/upload-artifact@v3
-        with:
-          name: python-app
-          path: |
-            release.zip
-            !venv/
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v3
-        with:
-          name: python-app
-
-      - name: Unzip artifact for deployment
-        run: unzip release.zip
-
-      
-      - name: 'Deploy to Azure Web App'
-        uses: azure/webapps-deploy@v2
-        id: deploy-to-webapp
-        with:
-          app-name: 'platformconsole-test1'
-          slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9BC0EABC93DF4E4C91F5A1AF122F2FC5 }}
+trigger:
+ branches:
+   include:
+     - main  # Replace 'main' with your main branch name
+ 
+variables:
+ azureSubscription:'<Azure subscription name>'
+ azureResourceGroup:'<Azure resource group name>'
+ appName: '<Azure Web App name>'
+ pythonVersion:'<Python version>'  # e.g., 3.8
+ nodeVersion:'<Node.js version>'    # e.g., 14.x
+ 
+stages:
+-stage: Build
+ displayName:'Build and Package'
+ jobs:
+ - job: Build_React
+   displayName:'Build React App'
+   pool:
+     vmImage: 'ubuntu-latest'
+   steps:
+   - task: NodeTool@0
+     inputs:
+       versionSpec:'$(nodeVersion)'
+     displayName:'Install Node.js'
+ 
+   - script: |
+       npm install
+       npm run build
+     displayName:'Build React Application'
+ 
+   - task: ArchiveFiles@2
+     displayName:'Archive Build Artifacts'
+     inputs:
+       rootFolderOrFile:'$(Build.SourcesDirectory)/build'
+       includeRootFolder:false
+       archiveType:'zip'
+       archiveFile:'$(Build.ArtifactStagingDirectory)/react-app.zip'
+       replaceExistingArchive:true
+ 
+ - job: Build_Python
+   displayName:'Build Python App'
+   pool:
+     vmImage: 'ubuntu-latest'
+   steps:
+   - task: UsePythonVersion@0
+     inputs:
+       versionSpec:'$(pythonVersion)'
+       addToPath: true
+     displayName:'Use Python $(pythonVersion)'
+ 
+   - script: |
+       python -m pip install --upgrade pip
+       pip install -r requirements.txt
+     displayName:'Install Python dependencies'
+ 
+   - task: ArchiveFiles@2
+     displayName:'Archive Python App'
+     inputs:
+       rootFolderOrFile:'$(Build.SourcesDirectory)'
+       includeRootFolder:false
+       archiveType:'zip'
+       archiveFile:'$(Build.ArtifactStagingDirectory)/python-app.zip'
+       replaceExistingArchive:true
+ 
+-stage: Deploy
+ displayName:'Deploy to Azure Web App'
+ dependsOn: Build
+ jobs:
+ - job: Deploy
+   displayName:'Deploy to Azure Web App'
+   pool:
+     vmImage: 'ubuntu-latest'
+   steps:
+   - task: AzureWebApp@1
+     displayName:'Azure Web App Deploy'
+     inputs:
+       azureSubscription:$(azureSubscription)
+       appName: $(appName)
+       package: '$(Pipeline.Workspace)/<path-to-your-zip-file>'
+       enableCustomDeployment:true
+       deploymentMethod:'zipDeploy'

@@ -4,11 +4,11 @@ trigger:
      - main  # Replace 'main' with your main branch name
  
 variables:
- azureSubscription:'<Azure subscription name>'
- azureResourceGroup:'<Azure resource group name>'
- appName: '<Azure Web App name>'
- pythonVersion:'<Python version>'  # e.g., 3.8
- nodeVersion:'<Node.js version>'    # e.g., 14.x
+ azureSubscription:'09dff827-8636-4ded-adf3-8291b150ab58'
+ azureResourceGroup:'Nucleus_DIF_AI_RG'
+ appName: 'platformconsole-test1'
+ pythonVersion:'3.11'  # e.g., 3.8
+ nodeVersion:'20.11.1'    # e.g., 14.x
  
 stages:
 -stage: Build
@@ -25,6 +25,7 @@ stages:
      displayName:'Install Node.js'
  
    - script: |
+       cd frontend
        npm install
        npm run build
      displayName:'Build React Application'
@@ -48,8 +49,9 @@ stages:
        versionSpec:'$(pythonVersion)'
        addToPath: true
      displayName:'Use Python $(pythonVersion)'
- 
+     
    - script: |
+       cd ../
        python -m pip install --upgrade pip
        pip install -r requirements.txt
      displayName:'Install Python dependencies'
@@ -77,6 +79,6 @@ stages:
      inputs:
        azureSubscription:$(azureSubscription)
        appName: $(appName)
-       package: '$(Pipeline.Workspace)/<path-to-your-zip-file>'
+       package: '$(Pipeline.Workspace)/reactApp.zip'
        enableCustomDeployment:true
        deploymentMethod:'zipDeploy'

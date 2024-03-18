@@ -30,3 +30,4 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: platformconsole-test1
+        publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9BC0EABC93DF4E4C91F5A1AF122F2FC5 }}

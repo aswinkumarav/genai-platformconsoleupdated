@@ -9,7 +9,8 @@ variables: azureSubscription:'09dff827-8636-4ded-adf3-8291b150ab58'
 stages: null
 -stage: Build displayName:'Build and Package'
 jobs:
-  - job: Build_React displayName:'Build React App'
+  - job: Build_React
+     displayName:'Build React App'
     pool:
       vmImage: ubuntu-latest
     steps:

@@ -3,7 +3,7 @@ import {Button, Col, Form, Row } from 'react-bootstrap';
 import style from "../styles/useCaseForm.module.scss";
 import { activeTabContext } from './UseCaseForms';
 import { formContext } from './UseCaseList';
-// import { showFormContext } from "./UseCaseList";
+import { showFormContext } from "./UseCaseList";
 import { addusecase, executeAPICalls } from '../../../api/api';
 import Spinner from "react-bootstrap/Spinner";
 import AlertBox from '../../../components/AlertBox';
@@ -14,8 +14,7 @@ function UIForm(prop: any) {
   const [validated, setValidated] = useState(false);
   const { setActiveTab } = useContext(activeTabContext);
   const { formData, setFormData } = useContext(formContext);
-  // const { setShowForm } = useContext(showFormContext);
-  const setShowForm: any = null
+  const { setShowForm } = useContext(showFormContext);
   const [isLoading, setIsLoading] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [alertContent, setAlertContent] = useState('');

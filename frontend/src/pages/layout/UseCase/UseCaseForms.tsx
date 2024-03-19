@@ -5,7 +5,7 @@ import { IoCheckmarkCircleOutline } from "react-icons/io5";
 import { IoCheckmarkCircle } from "react-icons/io5";
 import DetailsForm from "./DetailsForm";
 import { formContext } from "./UseCaseList";
-// import { showFormContext } from "./UseCaseList";
+import { showFormContext } from "./UseCaseList";
 import DataIngestionForms from "./DataIngestionForms";
 import DataProcessing from "./DataProcessingForms";
 import RetrieverForms from "./RetrieverForms";
@@ -43,8 +43,7 @@ const usecase = [
 function UseCaseForms(prop: any) {
     const [ activeTab, setActiveTab ] = useState('helpMeDecide');
     const { formData } = useContext(formContext);
-    // const { setShowForm } = useContext(showFormContext);
-    const setShowForm: any = null
+    const { setShowForm } = useContext(showFormContext);
 
     return (
         <>

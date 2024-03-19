@@ -6,8 +6,7 @@ export default defineConfig({
     plugins: [react()],
     build: {
         outDir: "./build",
-        emptyOutDir: true,
-        sourcemap: true
+        sourcemap: false
     },
     server: {
         proxy: {

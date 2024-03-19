@@ -1,5 +1,5 @@
 
-import Layout from "@/pages/Layout";
+import MainLayout from "./pages/Layout/wrapper";
 
 // Components
 
@@ -7,7 +7,7 @@ import Layout from "@/pages/Layout";
 const APP_ROUTES = [
   {
     path: "/",
-    element: <Layout />, // Landing Page
+    element: <MainLayout />, // Landing Page
     // children: [
     //   {
     //     path: "isPal",

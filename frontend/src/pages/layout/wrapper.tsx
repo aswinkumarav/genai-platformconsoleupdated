@@ -18,7 +18,7 @@ const Wrapper = styled.div`
   flex-grow: 1;
 `;
 
-function Layout() {
+function MainLayout() {
   return (
     <Wrapper>
       <Content>
@@ -32,4 +32,4 @@ function Layout() {
   );
 }
 
-export default Layout;
+export default MainLayout;

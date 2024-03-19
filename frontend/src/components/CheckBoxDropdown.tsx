@@ -1,8 +1,8 @@
 import { Form, Dropdown} from 'react-bootstrap';
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { useContext } from 'react';
-import { formContext } from '../pages/Layout/UseCase/list';
-import style from '../pages/Layout/styles/useCaseForm.module.scss'
+import { formContext } from '../Pages/Layout/UseCase/UseCaseList';
+import style from '../Pages/Layout/styles/useCaseForm.module.scss'
 
 function CheckBoxDropdown(props: any) {
     const { formData, setFormData } = useContext(formContext);

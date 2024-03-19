@@ -2,7 +2,7 @@ import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import { ImInfo } from "react-icons/im";
-import Style from "../pages/Layout/styles/common.module.scss"
+import Style from "../Pages/Layout/styles/common.module.scss"
 
 function CustomTooltip(props: any) {
   const renderTooltip = (data: any) => (

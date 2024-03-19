@@ -4,7 +4,7 @@ import CheckBoxDropdown from '../../../components/CheckBoxDropdown';
 import style from "../styles/useCaseForm.module.scss";
 import '../styles/main.css';
 import { service } from '../../../Service/CommonService';
-import { formContext } from './list';
+import { formContext } from './UseCaseList';
 import { activeTabContext } from './UseCaseForms';
 import BreakUpDetails from '../../../components/BreakUpDetails';
 

@@ -1,5 +1,5 @@
 
-import MainLayout from "./pages/Layout/wrapper";
+import MainLayout from "./Pages/Layout/Wrapper";
 
 // Components
 

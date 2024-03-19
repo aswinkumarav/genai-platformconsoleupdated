@@ -141,4 +141,3 @@ Error generating stack: `+a.message+`
   display: flex;
   flex-grow: 1;
 `;function SN(){return d.jsx(CN,{children:d.jsx(wN,{children:d.jsxs(g.Suspense,{children:[d.jsx(Ib,{}),d.jsx(xN,{}),d.jsx(Cg,{})]})})})}const kN=[{path:"/",element:d.jsx(SN,{})}],EN=NC([{element:d.jsx(RC,{}),children:kN}]);xu.createRoot(document.getElementById("root")).render(d.jsx(F.StrictMode,{children:d.jsx(bC,{router:EN})}));
-//# sourceMappingURL=index-5518241f.js.map

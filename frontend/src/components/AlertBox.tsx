@@ -1,4 +1,4 @@
-import style from "../pages/Layout/styles/common.module.scss";
+import style from "../Pages/Layout/styles/common.module.scss";
 import Alert from 'react-bootstrap/Alert';
 import { FiAlertTriangle } from "react-icons/fi";
 

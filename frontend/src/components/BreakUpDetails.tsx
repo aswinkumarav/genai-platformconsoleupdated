@@ -3,7 +3,7 @@ import { FaCircleArrowRight } from "react-icons/fa6";
 import {Col, Form, Table } from 'react-bootstrap';
 import { useState, useContext, useEffect } from 'react';
 import { service } from "../Service/CommonService";
-import { formContext } from "./../pages/Layout/UseCase/list";
+import { formContext } from "@/pages/Layout/UseCase/list";
 
 
 function BreakUpDetails() {

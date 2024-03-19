@@ -12,7 +12,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 
 export const formContext = createContext<any>({});
-export const showFormContext = createContext<any>({});
+// export const showFormContext = createContext<any>({});
 let pages: any = [];
 
 function UseCaseList() {
@@ -237,11 +237,11 @@ function UseCaseList() {
                     </div>
                 </>
             ) : (
-                <showFormContext.Provider value={{ showForm, setShowForm }}>
+                // <showFormContext.Provider value={{ showForm, setShowForm }}>
                     <formContext.Provider value={{ formData, setFormData }}>
                         <UseCaseForms trigger={getUseCaseList} useCaseNames={useCaseNames} currentUseCase={currentUseCase}/>
                     </formContext.Provider>
-                </showFormContext.Provider>
+                /* </showFormContext.Provider> */
             )}
 
         </div>

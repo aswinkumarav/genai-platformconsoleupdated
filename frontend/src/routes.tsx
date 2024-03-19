@@ -1,5 +1,5 @@
 
-import Layout from "./pages/Layout/index";
+import Layout from "./pages/Layout";
 
 // Components
 

@@ -1,4 +1,4 @@
-import UseCaseList from "../../Pages/Layout/UseCase/UseCaseList";
+import UseCaseList from "./useCase/UseCaseList";
 
 function LandingPage() {
 

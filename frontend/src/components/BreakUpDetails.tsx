@@ -1,9 +1,9 @@
-import style from "../Pages/Layout/styles/useCaseForm.module.scss";
+import style from "../pages/layout/styles/useCaseForm.module.scss";
 import { FaCircleArrowRight } from "react-icons/fa6";
 import {Col, Form, Table } from 'react-bootstrap';
 import { useState, useContext, useEffect } from 'react';
 import { service } from "../Service/CommonService";
-import { formContext } from "../Pages/Layout/UseCase/UseCaseList";
+import { formContext } from "../pages/layout/useCase/UseCaseList";
 
 
 function BreakUpDetails() {

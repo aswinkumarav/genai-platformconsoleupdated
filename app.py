@@ -59,6 +59,11 @@ if AZURE_COSMOSDB_DATABASE and AZURE_COSMOSDB_ACCOUNT and AZURE_COSMOSDB_QUERY_C
 async def react():
     return FileResponse("frontend/build/index.html")
 
+@app.get("/assets/{file_path:path}")
+def assets(file_path):
+    print(file_path)
+    return FileResponse("frontend/build/assets/"+file_path)
+
 @app.get("/useCase/list")
 async def list_useCase(page):
     limit=20

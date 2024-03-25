@@ -15,6 +15,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = FastAPI()
+ 
+# Mount the React app build folder to a subdirectory
+app.mount("/static", StaticFiles(directory="frontend/build",
+          html=True), name="static")
 
 app.add_middleware(
     CORSMiddleware,
@@ -48,6 +52,10 @@ if AZURE_COSMOSDB_DATABASE and AZURE_COSMOSDB_ACCOUNT and AZURE_COSMOSDB_QUERY_C
     except Exception as e:
         logging.exception("Exception in CosmosDB initialization", e)
         cosmos_query_client = None
+
+@app.get("/")
+async def react():
+    return FileResponse("frontend/build/index.html")
 
 @app.get("/useCase/list")
 async def list_useCase(page):

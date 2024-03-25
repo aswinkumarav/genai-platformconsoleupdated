@@ -11,6 +11,8 @@ from azure.cosmos.aio import CosmosClient
 from azure.cosmos import PartitionKey
 from azure.storage.blob.aio import BlobServiceClient
 from dotenv import load_dotenv
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 
 load_dotenv()
 

@@ -31,10 +31,10 @@ app.add_middleware(
 )
  
 # Initialize Cosmos DB client
-AZURE_COSMOSDB_ACCOUNT = ""
-AZURE_COSMOSDB_DATABASE = ""
-AZURE_COSMOSDB_QUERY_CONTAINER = ""
-AZURE_COSMOSDB_ACCOUNT_KEY = ""
+AZURE_COSMOSDB_ACCOUNT = os.environ['AzureCosmosDBAccount']
+AZURE_COSMOSDB_DATABASE = os.environ['AzureCosmosDBDataBase']
+AZURE_COSMOSDB_QUERY_CONTAINER = os.environ['AzureCosmosDBQueryContainer']
+AZURE_COSMOSDB_ACCOUNT_KEY = os.environ['AzureCosmosDBAccountKey']
 
 
 # Initialize a CosmosDB client for usecase with AAD auth
@@ -61,7 +61,6 @@ async def react():
 
 @app.get("/assets/{file_path:path}")
 def assets(file_path):
-    print(file_path)
     return FileResponse("frontend/build/assets/"+file_path)
 
 @app.get("/useCase/list")

@@ -20,13 +20,13 @@ function CheckBoxDropdown(props: any) {
 
     const renderOption = (key: string, value: string, name: string) => {
         return (
-            <div>
+            <div onClick={() => handleOptionChange(key, name)}>
                 <input
                     type="checkbox"
                     id={key}
                     checked={formData[props.fieldName].includes(key)}
                     onChange={() => handleOptionChange(key, name)}
-                    style={{height: '16px', width: '20px'}}
+                    style={{height: '16px', width: '20px', textAlign: 'left'}}
                 />
                 <label className={style.dropdownOPtionLabel} htmlFor={value}>{value}</label>
             </div>

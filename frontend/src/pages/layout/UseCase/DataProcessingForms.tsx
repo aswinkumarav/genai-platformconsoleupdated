@@ -173,7 +173,7 @@ function DataProcessing() {
                       type="radio"
                       label="Trigram"
                       name="ngram"
-                      id='Trigrams'
+                      id='Trigram'
                       value={ formData.ngram }
                       checked={ formData.ngram == 'Trigram'}
                       className={style.labelStyle}

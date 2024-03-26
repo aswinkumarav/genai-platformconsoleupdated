@@ -225,7 +225,7 @@ function DataIngestionForms() {
               <Form.Control
                   required
                   type="date"
-                  min={new Date().toISOString().slice(0, 10)}
+                  min={ formData.id ? null : new Date().toISOString().slice(0, 10)}
                   placeholder="Start Date"
                   name="startDate"
                   value={formData.startDate}

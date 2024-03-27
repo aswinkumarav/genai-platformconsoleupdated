@@ -1,5 +1,5 @@
 export const getList = async (page: number): Promise<Response | null> => {
-    const response = await fetch(`http://localhost:8000/useCase/list?page=${page}`, {
+    const response = await fetch(`/useCase/list?page=${page}`, {
         method: "GET",
     }).then((res) => {
         return res.json()
@@ -12,7 +12,7 @@ export const getList = async (page: number): Promise<Response | null> => {
 }
 
 export const deleteData = async(id: string, useCaseId: number): Promise<Response | null> => {
-    const response = await fetch(`http://localhost:8000/useCase/delete?id=${id}&use_case_id=${useCaseId}`, {
+    const response = await fetch(`/useCase/delete?id=${id}&use_case_id=${useCaseId}`, {
         method: "DELETE",
         body: JSON.stringify({
             messages: id
@@ -37,7 +37,7 @@ export const deleteData = async(id: string, useCaseId: number): Promise<Response
 
 
 export const addusecase = async (messages: any): Promise<Response> => {
-    const response = await fetch("http://localhost:8000/useCase/insert", {
+    const response = await fetch("/useCase/insert", {
         method: "POST",
         body: JSON.stringify({
             messages: messages
@@ -111,19 +111,19 @@ export async function executeAPICalls(useCaseName: string, reqData: any) {
     console.log(reqData);
     const apiEndpoints = [
         {
-            url: `http://localhost:8000/createStorageContainer`,
+            url: `/createStorageContainer`,
             body: JSON.stringify({useCaseName: containerName})
         },
         {
-            url: `http://localhost:8000/createCosmosDbContainer`,
+            url: `/createCosmosDbContainer`,
             body: JSON.stringify({useCaseName: containerName})
         },
         {
-            url: `http://localhost:8000/createSearchServiceIndex`,
+            url: `/createSearchServiceIndex`,
             body: JSON.stringify({useCaseName: containerName})
         },
         {
-            url: `http://localhost:8000/createLogicAppWorkflow`,
+            url: `/createLogicAppWorkflow`,
             body: JSON.stringify(reqData)
         },
     ];
